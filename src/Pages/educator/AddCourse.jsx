@@ -2,7 +2,11 @@ import React from 'react'
 
 const AddCourse = () => {
   return (
-    <div>AddCourse</div>
+    <div>
+
+
+      <h1>Add Course Page</h1>
+    </div>
   )
 }
 
