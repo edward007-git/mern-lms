@@ -4,7 +4,18 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+  
+    extend: {
+   fontSize: {
+    'course-details-heading-large': ['36px', '44px'],
+    'course-details-heading-small': ['26px', '36px'],
+    'home-heading-large': ['40px', '56px'],
+    'home-heading-small': ['28px', '34px'],
+    'default': ['16px', '24px']
+   },
+
+
+    },
   },
   plugins: [],
 }
