@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom'
-import { assets } from '../../assets/assests';    
+import { assets } from '../../assets/assets';    
 import { useClerk, UserButton, useUser } from '@clerk/clerk-react';
 
 const Navbar = () => {

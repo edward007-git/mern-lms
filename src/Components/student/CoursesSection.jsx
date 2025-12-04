@@ -1,13 +1,27 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import {Link} from 'react-router-dom'
+import { AppContext } from '../../Context/AppContext'
+import CourseCard from './CourseCard'
+
 
 const CoursesSection = () => {
+  const{allCourses}=useContext(AppContext)
   return (
+    <div className='py-16 md:px-40 px-8'>
+    <h2 className='text-3xl font-medium text-gray-800'>Learn from the best</h2>
+    <p className='text-sm md:text-base text-gray-500 mt-2 mb-3'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At neque ullam deleniti, accusantium omnis consequatur corporis ipsam dolorem aliquam ipsa repellat non perspiciatis modi minus quisquam quis esse harum cumque!
+
+    </p>
     <div>
-
-
-
-        <h1>CoursesSection</h1>
+      {allCourses.slice(0,4).map((course,index)=> <CourseCard key={index} course={course}/>)}
     </div>
+
+    <Link to={'/course-list'} onclick={()=> scrollTo(0,0)}
+      className='text-gray-500 border border-gray-500/30 px-10 py-3 rounded '>
+      Show all courses</Link>
+    
+        </div>
+
   )
 }
 
