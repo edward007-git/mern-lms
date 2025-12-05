@@ -13,6 +13,10 @@ module.exports = {
     'home-heading-small': ['28px', '34px'],
     'default': ['16px', '24px']
    },
+   gridTemplateColumns: {
+  auto: 'repeat(auto-fit, minmax(200px, 1fr))'
+}
+
 
 
     },
