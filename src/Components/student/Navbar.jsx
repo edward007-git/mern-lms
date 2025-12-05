@@ -7,7 +7,7 @@ import { AppContext } from '../../Context/AppContext';
 
 const Navbar = () => {
 
-  const { navigate}=useContext(AppContext)
+  const { navigate,iseducator}=useContext(AppContext)
   const isCourselistPage = location.pathname.includes('/course-list');
   const {openSignIn} = useClerk();
   const {user} = useUser(); 
@@ -20,7 +20,8 @@ const Navbar = () => {
        
        { user &&
         <> 
-        <button>Become Educator</button>
+        <button onClick={()=>navigate('/educator')} >{iseducator ? 'Educator Dashboard' :
+          'Become Educator'}</button>
        |<Link to='/my-enrollment'>My Enrollments</Link>
        
         </>}
@@ -37,7 +38,8 @@ const Navbar = () => {
                
        { user &&
         <> 
-        <button>Become Educator</button>
+        <button onClick={()=>navigate('/educator')} >{iseducator ? 'Educator Dashboard' :
+          'Become Educator'}</button>
        |<Link to='/my-enrollment'>My Enrollments</Link>
        
         </>}

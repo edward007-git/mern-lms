@@ -6,8 +6,10 @@ import { useNavigate } from 'react-router-dom';
 export const AppContext = createContext({});
 
 const AppContextProvider = ({ children }) => {
-  const [allCourses, setAllCourses] = useState([]);
+   const [allCourses, setAllCourses] = useState([]);
+  const [iseducator, setEducator] = useState(true); // if educator is signed-in
 
+  
   const currency = import.meta.env.VITE_CURRENCY;
   const navigate = useNavigate();
 
@@ -30,8 +32,8 @@ const AppContextProvider = ({ children }) => {
   }, []);
 
   const value = useMemo(
-    () => ({ currency, allCourses, setAllCourses, navigate, calculateRating }),
-    [currency, allCourses, navigate, calculateRating]
+    () => ({ currency, allCourses, setAllCourses, navigate, calculateRating ,iseducator,setEducator}),
+    [currency, allCourses, navigate, calculateRating,iseducator]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
