@@ -4,7 +4,7 @@ import { AppContext } from '../../Context/AppContext'
 import { Link } from 'react-router-dom'
 
 const CourseCard = ({ course }) => {
-  const { currency } = useContext(AppContext)
+  const { currency,calculateRating } = useContext(AppContext)
 
   return (
     // Make card a column flex and allow it to stretch to full height
@@ -34,15 +34,15 @@ const CourseCard = ({ course }) => {
 
         
             <div className="flex items-center gap-2">
-              <p className="text-sm">4.5</p>
+              <p className="text-sm">{calculateRating(course)}</p>
 
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <img key={i} src={assets.star} alt="" className="w-4 h-4" />
+                  <img key={i} src={i<Math.floor(calculateRating(course)) ? assets.star : assets.star_blank} alt="" className="w-4 h-4" />
                 ))}
               </div>
 
-              <p className="text-gray-500 text-sm">22</p>
+              <p className="text-gray-500 text-sm">{course.courseRatings.length}</p>
             </div>
 
             
