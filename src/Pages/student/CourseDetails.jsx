@@ -1,12 +1,13 @@
 import React, { useContext, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
+import humanizeDuration from "humanize-duration";
 
 const CourseDetails = () => {
   const { id } = useParams();
   const { allCourses, calculateRating, currency } = useContext(AppContext);
 
-  // find course without useEffect
+  // Find course
   const courseData = useMemo(() => {
     if (!allCourses || allCourses.length === 0) return null;
     return allCourses.find((course) => course._id === id) || null;
@@ -20,12 +21,35 @@ const CourseDetails = () => {
     );
   }
 
+  // ---------- Rating, Price, Students ----------
   const rating = calculateRating(courseData);
   const finalPrice = (
     courseData.coursePrice -
     (courseData.discount * courseData.coursePrice) / 100
   ).toFixed(2);
   const enrolled = courseData.studentsEnrolled ?? 0;
+  const totalRatings = courseData.courseRatings?.length || 0;
+
+  // ---------- Duration + Total Lectures ----------
+  const totalMinutes =
+    courseData.courseContent?.reduce((chapterSum, chapter) => {
+      const minutes =
+        chapter?.chapterContent?.reduce((sum, lecture) => {
+          return sum + Number(lecture?.lectureDuration || 0);
+        }, 0) || 0;
+
+      return chapterSum + minutes;
+    }, 0) || 0;
+
+  const durationLabel = humanizeDuration(totalMinutes * 60 * 1000, {
+    units: ["h", "m"],
+    round: true,
+  });
+
+  const totalLectures =
+    courseData.courseContent?.reduce((count, chapter) => {
+      return count + (chapter?.chapterContent?.length || 0);
+    }, 0) || 0;
 
   return (
     <div className="min-h-screen bg-white">
@@ -37,45 +61,59 @@ const CourseDetails = () => {
             {courseData.courseTitle}
           </h1>
 
-          {/* Description (HTML string) */}
+          {/* Description */}
           <div
             className="mt-3 text-sm md:text-base text-gray-700 leading-relaxed space-y-2"
             dangerouslySetInnerHTML={{ __html: courseData.courseDescription }}
           />
 
-          {/* Rating + ratings count + enrolled students */}
-          <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-gray-700">
-            {/* rating number */}
-            <p>{rating.toFixed(1)}</p>
+          {/* ===== META DETAILS ===== */}
+          <div className="mt-4 space-y-1 text-sm text-gray-700">
+            {/* Row 1: Rating + ratings count + students */}
+            <div className="flex flex-wrap items-center gap-3">
+              {/* rating number */}
+              <p className="font-medium">{rating.toFixed(1)}</p>
 
-            {/* stars */}
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => {
-                const filled = i < Math.floor(rating);
-                return (
-                  <span
-                    key={i}
-                    className={`w-4 h-4 text-sm leading-4 ${
-                      filled ? "text-yellow-400" : "text-gray-300"
-                    }`}
-                  >
-                    ★
-                  </span>
-                );
-              })}
+              {/* stars */}
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => {
+                  const filled = i < Math.floor(rating);
+                  return (
+                    <span
+                      key={i}
+                      className={`w-4 h-4 text-sm leading-4 ${
+                        filled ? "text-yellow-400" : "text-gray-300"
+                      }`}
+                    >
+                      ★
+                    </span>
+                  );
+                })}
+              </div>
+
+              {/* total ratings */}
+              <p className="text-gray-500">({totalRatings} ratings)</p>
+
+              {/* separator */}
+              <span className="text-gray-300">•</span>
+
+              {/* students enrolled */}
+              <p className="text-gray-600">
+                {enrolled.toLocaleString()} students enrolled
+              </p>
             </div>
 
-            {/* total ratings */}
-            <p className="text-gray-500">
-              ({courseData.courseRatings.length})
+            {/* Row 2: Instructor */}
+            <p className="text-gray-700">
+              Created by{" "}
+              <span className="font-medium">
+                {courseData.educator?.name || "Unknown instructor"}
+              </span>
             </p>
 
-            {/* separator */}
-            <span className="text-gray-300">•</span>
-
-            {/* students enrolled */}
+            {/* Row 3: Duration + lectures */}
             <p className="text-gray-600">
-              {enrolled.toLocaleString()} students enrolled
+              ⏱ {durationLabel} • {totalLectures} lectures
             </p>
           </div>
         </div>
@@ -83,11 +121,7 @@ const CourseDetails = () => {
 
       {/* ===== MAIN CONTENT ===== */}
       <section className="max-w-5xl mx-auto px-6 md:px-10 py-6">
-        {/* Instructor */}
-        <div className="p-4 border rounded-lg shadow-sm bg-white">
-          <h2 className="text-xl font-semibold">Instructor</h2>
-          <p className="text-gray-700 mt-1">{courseData.educator?.name}</p>
-        </div>
+        
 
         {/* Price */}
         <p className="text-2xl font-semibold text-blue-600 mt-6">
