@@ -18,7 +18,8 @@ const SearchBar = ({ data }) => {
   };
 
   return (
-    <div className="w-full flex justify-center md:justify-end">
+    <div className="w-full flex justify-center">
+ 
       <form 
         onSubmit={onSearchHandler}
         className="w-full max-w-2xl h-14 flex items-center bg-white border border-gray-300 rounded-full shadow-[0_2px_25px_rgba(0,0,0,0.12)]"
