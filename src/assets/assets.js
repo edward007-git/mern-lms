@@ -19,7 +19,7 @@ export const assets = {
   adobe_logo,
   google_logo,
   star,
-  // (keep your other asset imports here, e.g. profile_img_1..4)
+  
 };
 
 // -----------------------------------------------------
@@ -39,8 +39,34 @@ export const dummyCourses = [
     discount: 20,
     isPublished: true,
     courseRatings: [{ rating: 5 }, { rating: 4 }],
-    courseContent: [],
     studentsEnrolled: 2450,
+
+    
+    courseContent: [
+      {
+        chapterTitle: "Getting Started",
+        chapterContent: [
+          { lectureTitle: "What is JavaScript?", lectureDuration: 6 },
+          { lectureTitle: "Setting Up Your Environment", lectureDuration: 8 },
+          { lectureTitle: "Your First Script", lectureDuration: 10 },
+        ],
+      },
+      {
+        chapterTitle: "Core Basics",
+        chapterContent: [
+          { lectureTitle: "Variables & Data Types", lectureDuration: 14 },
+          { lectureTitle: "Operators & Expressions", lectureDuration: 12 },
+          { lectureTitle: "Control Flow (if, switch)", lectureDuration: 16 },
+        ],
+      },
+      {
+        chapterTitle: "Functions & DOM",
+        chapterContent: [
+          { lectureTitle: "Functions in JavaScript", lectureDuration: 15 },
+          { lectureTitle: "Intro to DOM", lectureDuration: 18 },
+        ],
+      },
+    ],
   },
 
   {
@@ -58,8 +84,34 @@ export const dummyCourses = [
     discount: 10,
     isPublished: true,
     courseRatings: [{ rating: 5 }],
-    courseContent: [],
     studentsEnrolled: 1800,
+
+    
+    courseContent: [
+      {
+        chapterTitle: "Introduction to Python",
+        chapterContent: [
+          { lectureTitle: "Why Python?", lectureDuration: 5 },
+          { lectureTitle: "Installing Python & IDE", lectureDuration: 9 },
+          { lectureTitle: "Your First Python Program", lectureDuration: 8 },
+        ],
+      },
+      {
+        chapterTitle: "Python Fundamentals",
+        chapterContent: [
+          { lectureTitle: "Variables & Input", lectureDuration: 12 },
+          { lectureTitle: "Conditional Statements", lectureDuration: 15 },
+          { lectureTitle: "Loops (for & while)", lectureDuration: 17 },
+        ],
+      },
+      {
+        chapterTitle: "Data Structures",
+        chapterContent: [
+          { lectureTitle: "Lists & Tuples", lectureDuration: 14 },
+          { lectureTitle: "Dictionaries & Sets", lectureDuration: 16 },
+        ],
+      },
+    ],
   },
 
   {
@@ -77,8 +129,35 @@ export const dummyCourses = [
     discount: 25,
     isPublished: true,
     courseRatings: [{ rating: 5 }, { rating: 4 }],
-    courseContent: [],
     studentsEnrolled: 3200,
+
+    
+    courseContent: [
+      {
+        chapterTitle: "React Basics",
+        chapterContent: [
+          { lectureTitle: "What is React?", lectureDuration: 10 },
+          { lectureTitle: "Creating a React App", lectureDuration: 12 },
+          { lectureTitle: "JSX & Components", lectureDuration: 18 },
+        ],
+      },
+      {
+        chapterTitle: "State & Props",
+        chapterContent: [
+          { lectureTitle: "Props in React", lectureDuration: 14 },
+          { lectureTitle: "Managing State", lectureDuration: 20 },
+          { lectureTitle: "Lifting State Up", lectureDuration: 16 },
+        ],
+      },
+      {
+        chapterTitle: "Hooks & Advanced Topics",
+        chapterContent: [
+          { lectureTitle: "useState & useEffect", lectureDuration: 22 },
+          { lectureTitle: "React Router Basics", lectureDuration: 20 },
+          { lectureTitle: "Context API", lectureDuration: 18 },
+        ],
+      },
+    ],
   },
 
   {
@@ -96,10 +175,37 @@ export const dummyCourses = [
     discount: 20,
     isPublished: true,
     courseRatings: [{ rating: 5 }],
-    courseContent: [],
     studentsEnrolled: 2809,
+
+    
+    courseContent: [
+      {
+        chapterTitle: "Node.js Basics",
+        chapterContent: [
+          { lectureTitle: "Intro to Node.js", lectureDuration: 9 },
+          { lectureTitle: "Node.js Architecture", lectureDuration: 11 },
+          { lectureTitle: "Working with npm", lectureDuration: 10 },
+        ],
+      },
+      {
+        chapterTitle: "Express.js Fundamentals",
+        chapterContent: [
+          { lectureTitle: "What is Express?", lectureDuration: 12 },
+          { lectureTitle: "Routing in Express", lectureDuration: 18 },
+          { lectureTitle: "Middleware Basics", lectureDuration: 16 },
+        ],
+      },
+      {
+        chapterTitle: "Building REST APIs",
+        chapterContent: [
+          { lectureTitle: "Creating REST Endpoints", lectureDuration: 20 },
+          { lectureTitle: "Connecting to Database", lectureDuration: 22 },
+        ],
+      },
+    ],
   },
 ];
+
 
 export const dummyTestimonial = [
   {
