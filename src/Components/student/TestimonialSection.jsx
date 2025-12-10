@@ -3,11 +3,13 @@ import { dummyTestimonial } from '../../assets/assets';
 
 const TestimonialSection = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 cursor-pointer">
       {dummyTestimonial.map((testimonial, index) => (
         <div
           key={index}
-          className="bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center"
+        className="bg-white shadow-md rounded-xl p-6 flex flex-col items-center text-center 
+           transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+
         >
           <img
             src={testimonial.image}
