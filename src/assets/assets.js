@@ -207,40 +207,38 @@ export const dummyCourses = [
 ];
 
 
-export const dummyTestimonial = [
+
+  export const dummyTestimonial = [
   {
-    name: "Donald Jackman",
-    role: "SWE 1 @ Amazon",
-    image: assets.profile_img_1,
+    name: "John Carter",
+    role: "Full-Stack Developer",
     rating: 5,
+    image: "https://i.pravatar.cc/150?img=12",
     feedback:
-      "I've been using this platform for nearly two years, and it has been incredibly user-friendly, making my work much easier.",
+      "This platform completely transformed how I learn. The lessons are clear, structured, and full of real-world insights."
   },
-
   {
-    name: "Sophia Martinez",
-    role: "UI/UX Designer @ Figma",
-    image: assets.profile_img_2,
-    rating: 4.5,
-    feedback:
-      "The courses here helped me sharpen my design fundamentals. The learning experience is smooth and enjoyable.",
-  },
-
-  {
-    name: "Rahul Verma",
-    role: "Frontend Developer @ Google",
-    image: assets.profile_img_3,
+    name: "Sarah Miller",
+    role: "UI/UX Designer",
     rating: 4,
+    image: "https://i.pravatar.cc/150?img=47",
     feedback:
-      "Great structure and amazing educators! The real-world projects boosted my confidence for big tech interviews.",
+      "A fantastic learning experience! The layout, topics, and depth of content are perfect for anyone starting out."
   },
-
   {
-    name: "Emily Watson",
-    role: "Data Analyst @ Microsoft",
-    image: assets.profile_img_4,
+    name: "David Johnson",
+    role: "Software Engineer",
     rating: 5,
+    image: "https://i.pravatar.cc/150?img=33",
     feedback:
-      "Crystal-clear explanations and very practical examples. Perfect for anyone wanting to upscale their career.",
+      "Amazing platform! The examples and explanations helped me improve my development skills significantly."
   },
+  {
+    name: "Emily Parker",
+    role: "Data Analyst",
+    rating: 5,
+    image: "https://i.pravatar.cc/150?img=56",
+    feedback:
+      "I loved the teaching style—simple, engaging, and practical. It boosted my confidence in data analysis."
+  }
 ];
