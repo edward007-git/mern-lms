@@ -1,7 +1,6 @@
 // ---------------------------
 // MAIN LOGOS + STAR ICON
 // ---------------------------
-import logo from "../assets/images/logo.png";
 import user_icon from "../assets/images/user.png";
 import microsoft_logo from "../assets/images/Microsoft_logo_(2012).svg.png";
 import walmart_logo from "../assets/images/Walmart_logo_(2008).svg.png";
@@ -11,7 +10,6 @@ import google_logo from "../assets/images/google-logo-transparent.svg.png";
 import star from "../assets/images/star.svg";
 
 export const assets = {
-  logo,
   user_icon,
   microsoft_logo,
   walmart_logo,
