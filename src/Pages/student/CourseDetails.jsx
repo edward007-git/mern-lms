@@ -7,6 +7,7 @@ const CourseDetails = () => {
   const { id } = useParams();
   const { allCourses, calculateRating, currency } = useContext(AppContext);
     const [openChapters, setOpenChapters] = useState([]);
+    const[isAlreadyEnrolled,setIsAlreadyEnrolled] =useState(false)
 
 
   const courseData = useMemo(() => {
@@ -160,9 +161,17 @@ const CourseDetails = () => {
                   )}
                 </div>
 
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm transition">
-                  Enroll Now
-                </button>
+                <button
+      onClick={() => setIsAlreadyEnrolled(true)}
+     disabled={isAlreadyEnrolled}
+       className={`
+        w-full py-3 rounded md:mt-6 mt-4 font-medium text-white 
+    ${isAlreadyEnrolled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}
+  `}
+>
+  {isAlreadyEnrolled ? 'Already Enrolled' : 'Enroll Now'}
+</button>
+
 
                 <div className="flex flex-wrap items-center gap-3 text-[11px] text-gray-600 pt-2 border-t">
                   <span>⭐ {rating.toFixed(1)}</span>
