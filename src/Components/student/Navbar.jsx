@@ -14,7 +14,17 @@ const Navbar = () => {
   return (
     <div className={`flex items-center justify-between px-4 sm:px-10 md:px-12 lg:px-36 border-b border-gray-500 py-4
      ${isCourselistPage ? 'bg-white shadow-md' : 'bg-cyan-100/70'}`}>
-     <img onClick={()=> navigate('/')} src={assets.logo} alt="Logo" className='h-10 object-contain cursor-pointer' />
+     
+     <button
+  onClick={() => navigate('/')}
+  className="flex items-center gap-2 cursor-pointer"
+>
+
+  <span className="text-xl font-semibold tracking-tight">
+    Study<span className="text-blue-600">X</span>
+  </span>
+</button>
+
       <div className='hidden md:flex items-center gap-5 text-gray-500'>
       <div className='flex items-center gap-5'>
        
