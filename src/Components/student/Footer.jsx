@@ -2,17 +2,20 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#050816] text-gray-200 px-4 md:px-12 py-">
+    <footer className="bg-[#050816] text-gray-200 px-4 md:px-12 py-10">
+
       <div className="max-w-7xl mx-auto">
 
         {/* ==== TOP SECTION ==== */}
         <div className="flex flex-col md:flex-row justify-between gap-12 pb-10 border-b border-gray-700/60">
 
-          {/* ==== LOGO + TEXT ==== */}
+      
           <div className="flex flex-col gap-4 max-w-md">
             <div className="flex items-center gap-2">
               
-              <h2 className="text-xl font-semibold">StudyX</h2>
+            <span className="text-xl font-semibold tracking-tight">
+    Study<span className="text-blue-600">X</span>
+  </span>
             </div>
 
             <p className="text-gray-400 text-sm leading-relaxed">
