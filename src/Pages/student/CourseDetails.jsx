@@ -123,7 +123,7 @@ const CourseDetails = () => {
             
               </div>
                 {/* COURSE STRUCTURE (Accordion) */}
-               <div className="mt-12 lg:mt-20 mb-10">
+               <div className="mt-8 lg:mt-16 mb-8">
                 <h2 className="text-xl md:text-2xl font-semibold mb-4">
                   Course Structure
                 </h2>
