@@ -25,8 +25,7 @@ const CourseDetails = () => {
   // ---------- Rating, Price, Students ----------
   const rating = calculateRating(courseData);
   const finalPrice = (
-    courseData.coursePrice -
-    (courseData.discount * courseData.coursePrice) / 100
+    courseData.coursePrice - (courseData.discount * courseData.coursePrice) / 100
   ).toFixed(2);
 
   const oldPrice = courseData.coursePrice?.toFixed
@@ -119,86 +118,92 @@ const CourseDetails = () => {
               <p className="text-gray-600">
                 ⏱ {durationLabel} • {totalLectures} lectures
               </p>
+            </div>
 
-            
-              </div>
-                {/* COURSE STRUCTURE (Accordion) */}
-               <div className="mt-8 lg:mt-16 mb-8">
-                <h2 className="text-xl md:text-2xl font-semibold mb-4">
-                  Course Structure
-                </h2>
+          
 
-                <div className="space-y-3">
-                  {courseData.courseContent?.map((chapter, index) => {
-                    const isOpen = openChapters[index];
+            {/* COURSE STRUCTURE (Accordion) */}
+            <div className="mt-8 lg:mt-16 mb-8">
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">
+                Course Structure
+              </h2>
 
-                    const chapterMinutes =
-                      chapter.chapterContent?.reduce((sum, lecture) => {
-                        return sum + Number(lecture.lectureDuration || 0);
-                      }, 0) || 0;
+              <div className="space-y-3">
+                {courseData.courseContent?.map((chapter, index) => {
+                  const isOpen = openChapters[index];
 
-                    const formattedDuration = humanizeDuration(
-                      chapterMinutes * 60 * 1000,
-                      { units: ["h", "m"], round: true }
-                    );
+                  const chapterMinutes =
+                    chapter.chapterContent?.reduce((sum, lecture) => {
+                      return sum + Number(lecture.lectureDuration || 0);
+                    }, 0) || 0;
 
-                    const lectureCount = chapter.chapterContent?.length || 0;
+                  const formattedDuration = humanizeDuration(
+                    chapterMinutes * 60 * 1000,
+                    { units: ["h", "m"], round: true }
+                  );
 
-                    return (
-                      <div
-                        key={index}
-                        className="bg-white border rounded-xl shadow-sm"
+                  const lectureCount = chapter.chapterContent?.length || 0;
+
+                  return (
+                    <div key={index} className="bg-white border rounded-xl shadow-sm">
+                      {/* Header row */}
+                      <button
+                        type="button"
+                        onClick={() => toggleChapter(index)}
+                        className="w-full flex items-center justify-between px-4 py-3"
                       >
-                        {/* Header row */}
-                        <button
-                          type="button"
-                          onClick={() => toggleChapter(index)}
-                          className="w-full flex items-center justify-between px-4 py-3"
-                        >
-                          <div className="flex items-center gap-3">
-                            <span
-                              className={`text-gray-400 text-lg transform transition-transform ${
-                                isOpen ? "rotate-90" : ""
-                              }`}
-                            >
-                              ▸
-                            </span>
-                            <p className="font-medium text-gray-800">
-                              {chapter.chapterTitle}
-                            </p>
-                          </div>
-
-                          <p className="text-sm text-gray-500 whitespace-nowrap">
-                            {lectureCount} lectures • {formattedDuration}
+                        <div className="flex items-center gap-3">
+                          <span
+                            className={`text-gray-400 text-lg transform transition-transform ${
+                              isOpen ? "rotate-90" : ""
+                            }`}
+                          >
+                            ▸
+                          </span>
+                          <p className="font-medium text-gray-800">
+                            {chapter.chapterTitle}
                           </p>
-                        </button>
+                        </div>
 
-                        {/* Lectures list */}
-                        {isOpen && (
-                          <div className="border-t px-4 py-3 space-y-2">
-                            {chapter.chapterContent?.map((lecture, i) => (
-                              <div
-                                key={i}
-                                className="flex items-center justify-between text-sm text-gray-700"
-                              >
-                                <span>
-                                  {i + 1}. {lecture.lectureTitle}
-                                </span>
-                                <span className="text-gray-500">
-                                  {lecture.lectureDuration} min
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              
+                        <p className="text-sm text-gray-500 whitespace-nowrap">
+                          {lectureCount} lectures • {formattedDuration}
+                        </p>
+                      </button>
+
+                      {/* Lectures list */}
+                      {isOpen && (
+                        <div className="border-t px-4 py-3 space-y-2">
+                          {chapter.chapterContent?.map((lecture, i) => (
+                            <div
+                              key={i}
+                              className="flex items-center justify-between text-sm text-gray-700"
+                            >
+                              <span>
+                                {i + 1}. {lecture.lectureTitle}
+                              </span>
+                              <span className="text-gray-500">{lecture.lectureDuration} min</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+                {/* ===== description ===== */}
+            <div className="mt-8 lg:mt-10">
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">
+                Course Description
+              </h2>
+              <div
+                className="text-sm md:text-base text-gray-700 leading-relaxed space-y-2 bg-white p-6 rounded-lg shadow-sm"
+                dangerouslySetInnerHTML={{ __html: courseData.courseDescription }}
+              />
+            </div>
             </div>
           </div>
-
+           
+           
           {/* RIGHT: Course summary card */}
           <aside className="mt-8 lg:mt-0 lg:w-72 lg:shrink-0">
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -240,9 +245,9 @@ const CourseDetails = () => {
                   onClick={() => setIsAlreadyEnrolled(true)}
                   disabled={isAlreadyEnrolled}
                   className={`
-        w-full py-3 rounded md:mt-6 mt-4 font-medium text-white 
-    ${isAlreadyEnrolled ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}
-  `}
+                    w-full py-3 rounded md:mt-6 mt-4 font-medium text-white 
+                    ${isAlreadyEnrolled ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}
+                  `}
                 >
                   {isAlreadyEnrolled ? "Already Enrolled" : "Enroll Now"}
                 </button>
@@ -272,16 +277,7 @@ const CourseDetails = () => {
         </div>
       </section>
 
-      {/* COURSE DESCRIPTION BELOW THE CARD  */}
-      <section className="max-w-6xl mx-auto px-6 md:px-10 py-6">
-        <h2 className="text-xl md:text-2xl font-semibold mb-4">
-          Course Description
-        </h2>
-        <div
-          className="text-sm md:text-base text-gray-700 leading-relaxed space-y-2 bg-white p-6 rounded-lg shadow-sm"
-          dangerouslySetInnerHTML={{ __html: courseData.courseDescription }}
-        />
-      </section>
+      
     </div>
   );
 };
