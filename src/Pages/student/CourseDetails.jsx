@@ -120,7 +120,9 @@ const CourseDetails = () => {
                 ⏱ {durationLabel} • {totalLectures} lectures
               </p>
 
-              {/* COURSE STRUCTURE (Accordion) */}
+            
+              </div>
+                {/* COURSE STRUCTURE (Accordion) */}
                <div className="mt-12 lg:mt-20 mb-10">
                 <h2 className="text-xl md:text-2xl font-semibold mb-4">
                   Course Structure
@@ -193,7 +195,6 @@ const CourseDetails = () => {
                     );
                   })}
                 </div>
-              </div>
               
             </div>
           </div>
