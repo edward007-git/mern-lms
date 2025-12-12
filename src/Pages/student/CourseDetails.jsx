@@ -2,6 +2,7 @@ import React, { useContext, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import humanizeDuration from "humanize-duration";
+import Footer from "../../Components/student/Footer";
 
 const CourseDetails = () => {
   const { id } = useParams();
@@ -276,6 +277,7 @@ const CourseDetails = () => {
           </aside>
         </div>
       </section>
+      <Footer />
 
       
     </div>
