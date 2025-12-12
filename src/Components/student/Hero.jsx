@@ -1,29 +1,27 @@
 import React from 'react'
 import SearchBar from './SearchBar'
-//import { assets } from '../../assets/assests';
 
 const Hero = () => {
   return (
-    <div className='flex flex-col items-center justify-center w-full md:pt-24 pt-12  py-4
-    px-7 md:px-0 space-y-7 text-center bg-gradient-to-b from-cyan-100'>
-    <h1 className='md:text-home-heading-large text-home-heading-small relative font-bold text-gray-800
-    max-w-3xl mx-auto'>
-         Learn Anytime, Anywhere <span className='text-blue-600'> — Discover Courses That Fit Your Journey
+    <div className='flex flex-col items-center justify-center w-full md:pt-24 pt-12 py-4
+      px-7 md:px-0 space-y-7 text-center bg-gradient-to-b from-cyan-100'>
 
-      </span>                  {/*<img src={assets.hero_image} alt="Hero" className='md:block hidden absolute -bottom right-0'/> */}
-    </h1  >
+      <h1 className='md:text-home-heading-large text-home-heading-small relative font-bold text-gray-800
+        max-w-3xl mx-auto'>
+        Learn Anytime, Anywhere
+        <span className='text-blue-600'> — Discover Courses That Fit Your Journey</span>
+      </h1>
 
-    <p className='md:block hidden text-gray-500 max-w-2xl mx-auto'>
+      <p className='hidden md:block text-gray-600 max-w-2xl mx-auto'>
+        Explore expert-crafted courses designed to help you grow in your career,
+        learn new skills, and achieve your goals — all at your own pace.
+      </p>
 
+      <p className='md:hidden text-gray-600 max-w-sm mx-auto'>
+        Learn new skills, grow your career, and explore courses made for your goals.
+      </p>
 
- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos eius sunt accusamus illo iure saepe nobis ratione corporis eos voluptates, harum tenetur, dolore consequuntur quae suscipit. Cum optio natus amet?
-    </p>
-    <p className='md:hidden text-gray-500 max-w-sm mx-auto'>
-  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos eius sunt accusamus illo iure saepe nobis ratione corporis eos voluptates, harum tenetur, dolore consequuntur quae suscipit. Cum optio natus amet?
-    </p>
-    
-    <SearchBar/>
-
+      <SearchBar />
     </div>
   )
 }
