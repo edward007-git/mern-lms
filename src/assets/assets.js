@@ -1,6 +1,4 @@
-// ---------------------------
-// MAIN LOGOS + STAR ICON
-// ---------------------------
+
 import user_icon from "../assets/images/user.png";
 import microsoft_logo from "../assets/images/Microsoft_logo_(2012).svg.png";
 import walmart_logo from "../assets/images/Walmart_logo_(2008).svg.png";
@@ -17,10 +15,8 @@ export const assets = {
   adobe_logo,
   google_logo,
   star,
-  
 };
 
-// -----------------------------------------------------
 export const dummyCourses = [
   {
     _id: "650a00000000000000000001",
@@ -39,29 +35,28 @@ export const dummyCourses = [
     courseRatings: [{ rating: 5 }, { rating: 4 }],
     studentsEnrolled: 2450,
 
-    
     courseContent: [
       {
         chapterTitle: "Getting Started",
         chapterContent: [
-          { lectureTitle: "What is JavaScript?", lectureDuration: 6 },
-          { lectureTitle: "Setting Up Your Environment", lectureDuration: 8 },
-          { lectureTitle: "Your First Script", lectureDuration: 10 },
+          { lectureTitle: "What is JavaScript?", lectureDuration: 6, videoId: "CBWnBi-awSA" },
+          { lectureTitle: "Setting Up Your Environment", lectureDuration: 8, videoId: "CBWnBi-awSA" },
+          { lectureTitle: "Your First Script", lectureDuration: 10, videoId: "CBWnBi-awSA" },
         ],
       },
       {
         chapterTitle: "Core Basics",
         chapterContent: [
-          { lectureTitle: "Variables & Data Types", lectureDuration: 14 },
-          { lectureTitle: "Operators & Expressions", lectureDuration: 12 },
-          { lectureTitle: "Control Flow (if, switch)", lectureDuration: 16 },
+          { lectureTitle: "Variables & Data Types", lectureDuration: 14, videoId: "CBWnBi-awSA" },
+          { lectureTitle: "Operators & Expressions", lectureDuration: 12, videoId: "CBWnBi-awSA" },
+          { lectureTitle: "Control Flow (if, switch)", lectureDuration: 16, videoId: "CBWnBi-awSA" },
         ],
       },
       {
         chapterTitle: "Functions & DOM",
         chapterContent: [
-          { lectureTitle: "Functions in JavaScript", lectureDuration: 15 },
-          { lectureTitle: "Intro to DOM", lectureDuration: 18 },
+          { lectureTitle: "Functions in JavaScript", lectureDuration: 15, videoId: "CBWnBi-awSA" },
+          { lectureTitle: "Intro to DOM", lectureDuration: 18, videoId: "CBWnBi-awSA" },
         ],
       },
     ],
@@ -84,29 +79,28 @@ export const dummyCourses = [
     courseRatings: [{ rating: 5 }],
     studentsEnrolled: 1800,
 
-    
     courseContent: [
       {
         chapterTitle: "Introduction to Python",
         chapterContent: [
-          { lectureTitle: "Why Python?", lectureDuration: 5 },
-          { lectureTitle: "Installing Python & IDE", lectureDuration: 9 },
-          { lectureTitle: "Your First Python Program", lectureDuration: 8 },
+          { lectureTitle: "Why Python?", lectureDuration: 5, videoId: "rfscVS0vtbw" },
+          { lectureTitle: "Installing Python & IDE", lectureDuration: 9, videoId: "rfscVS0vtbw" },
+          { lectureTitle: "Your First Python Program", lectureDuration: 8, videoId: "rfscVS0vtbw" },
         ],
       },
       {
         chapterTitle: "Python Fundamentals",
         chapterContent: [
-          { lectureTitle: "Variables & Input", lectureDuration: 12 },
-          { lectureTitle: "Conditional Statements", lectureDuration: 15 },
-          { lectureTitle: "Loops (for & while)", lectureDuration: 17 },
+          { lectureTitle: "Variables & Input", lectureDuration: 12, videoId: "rfscVS0vtbw" },
+          { lectureTitle: "Conditional Statements", lectureDuration: 15, videoId: "rfscVS0vtbw" },
+          { lectureTitle: "Loops (for & while)", lectureDuration: 17, videoId: "rfscVS0vtbw" },
         ],
       },
       {
         chapterTitle: "Data Structures",
         chapterContent: [
-          { lectureTitle: "Lists & Tuples", lectureDuration: 14 },
-          { lectureTitle: "Dictionaries & Sets", lectureDuration: 16 },
+          { lectureTitle: "Lists & Tuples", lectureDuration: 14, videoId: "rfscVS0vtbw" },
+          { lectureTitle: "Dictionaries & Sets", lectureDuration: 16, videoId: "rfscVS0vtbw" },
         ],
       },
     ],
@@ -129,30 +123,29 @@ export const dummyCourses = [
     courseRatings: [{ rating: 5 }, { rating: 4 }],
     studentsEnrolled: 3200,
 
-    
     courseContent: [
       {
         chapterTitle: "React Basics",
         chapterContent: [
-          { lectureTitle: "What is React?", lectureDuration: 10 },
-          { lectureTitle: "Creating a React App", lectureDuration: 12 },
-          { lectureTitle: "JSX & Components", lectureDuration: 18 },
+          { lectureTitle: "What is React?", lectureDuration: 10, videoId: "Ke90Tje7VS0" },
+          { lectureTitle: "Creating a React App", lectureDuration: 12, videoId: "Ke90Tje7VS0" },
+          { lectureTitle: "JSX & Components", lectureDuration: 18, videoId: "Ke90Tje7VS0" },
         ],
       },
       {
         chapterTitle: "State & Props",
         chapterContent: [
-          { lectureTitle: "Props in React", lectureDuration: 14 },
-          { lectureTitle: "Managing State", lectureDuration: 20 },
-          { lectureTitle: "Lifting State Up", lectureDuration: 16 },
+          { lectureTitle: "Props in React", lectureDuration: 14, videoId: "Ke90Tje7VS0" },
+          { lectureTitle: "Managing State", lectureDuration: 20, videoId: "Ke90Tje7VS0" },
+          { lectureTitle: "Lifting State Up", lectureDuration: 16, videoId: "Ke90Tje7VS0" },
         ],
       },
       {
         chapterTitle: "Hooks & Advanced Topics",
         chapterContent: [
-          { lectureTitle: "useState & useEffect", lectureDuration: 22 },
-          { lectureTitle: "React Router Basics", lectureDuration: 20 },
-          { lectureTitle: "Context API", lectureDuration: 18 },
+          { lectureTitle: "useState & useEffect", lectureDuration: 22, videoId: "Ke90Tje7VS0" },
+          { lectureTitle: "React Router Basics", lectureDuration: 20, videoId: "Ke90Tje7VS0" },
+          { lectureTitle: "Context API", lectureDuration: 18, videoId: "Ke90Tje7VS0" },
         ],
       },
     ],
@@ -175,45 +168,45 @@ export const dummyCourses = [
     courseRatings: [{ rating: 5 }],
     studentsEnrolled: 2809,
 
-    
     courseContent: [
       {
         chapterTitle: "Node.js Basics",
         chapterContent: [
-          { lectureTitle: "Intro to Node.js", lectureDuration: 9 },
-          { lectureTitle: "Node.js Architecture", lectureDuration: 11 },
-          { lectureTitle: "Working with npm", lectureDuration: 10 },
+          { lectureTitle: "Intro to Node.js", lectureDuration: 9, videoId: "TlB_eWDSMt4" },
+          { lectureTitle: "Node.js Architecture", lectureDuration: 11, videoId: "TlB_eWDSMt4" },
+          { lectureTitle: "Working with npm", lectureDuration: 10, videoId: "TlB_eWDSMt4" },
         ],
       },
       {
         chapterTitle: "Express.js Fundamentals",
         chapterContent: [
-          { lectureTitle: "What is Express?", lectureDuration: 12 },
-          { lectureTitle: "Routing in Express", lectureDuration: 18 },
-          { lectureTitle: "Middleware Basics", lectureDuration: 16 },
+          { lectureTitle: "What is Express?", lectureDuration: 12, videoId: "TlB_eWDSMt4" },
+          { lectureTitle: "Routing in Express", lectureDuration: 18, videoId: "TlB_eWDSMt4" },
+          { lectureTitle: "Middleware Basics", lectureDuration: 16, videoId: "TlB_eWDSMt4" },
         ],
       },
       {
         chapterTitle: "Building REST APIs",
         chapterContent: [
-          { lectureTitle: "Creating REST Endpoints", lectureDuration: 20 },
-          { lectureTitle: "Connecting to Database", lectureDuration: 22 },
+          { lectureTitle: "Creating REST Endpoints", lectureDuration: 20, videoId: "TlB_eWDSMt4" },
+          { lectureTitle: "Connecting to Database", lectureDuration: 22, videoId: "TlB_eWDSMt4" },
         ],
       },
     ],
   },
 ];
 
-
-
-  export const dummyTestimonial = [
+// -----------------------------------------------------
+// TESTIMONIALS
+// -----------------------------------------------------
+export const dummyTestimonial = [
   {
     name: "John Carter",
     role: "Full-Stack Developer",
     rating: 5,
     image: "https://i.pravatar.cc/150?img=12",
     feedback:
-      "This platform completely transformed how I learn. The lessons are clear, structured, and full of real-world insights."
+      "This platform completely transformed how I learn. The lessons are clear, structured, and full of real-world insights.",
   },
   {
     name: "Sarah Miller",
@@ -221,7 +214,7 @@ export const dummyCourses = [
     rating: 4,
     image: "https://i.pravatar.cc/150?img=47",
     feedback:
-      "A fantastic learning experience! The layout, topics, and depth of content are perfect for anyone starting out."
+      "A fantastic learning experience! The layout, topics, and depth of content are perfect for anyone starting out.",
   },
   {
     name: "David Johnson",
@@ -229,7 +222,7 @@ export const dummyCourses = [
     rating: 5,
     image: "https://i.pravatar.cc/150?img=33",
     feedback:
-      "Amazing platform! The examples and explanations helped me improve my development skills significantly."
+      "Amazing platform! The examples and explanations helped me improve my development skills significantly.",
   },
   {
     name: "Emily Parker",
@@ -237,6 +230,6 @@ export const dummyCourses = [
     rating: 5,
     image: "https://i.pravatar.cc/150?img=56",
     feedback:
-      "I loved the teaching style—simple, engaging, and practical. It boosted my confidence in data analysis."
-  }
+      "I loved the teaching style—simple, engaging, and practical. It boosted my confidence in data analysis.",
+  },
 ];
