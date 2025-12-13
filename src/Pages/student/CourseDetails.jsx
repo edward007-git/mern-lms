@@ -1,63 +1,90 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, {
+  useContext,
+  useMemo,
+  useState,
+  
+} from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import humanizeDuration from "humanize-duration";
 import Footer from "../../Components/student/Footer";
+import YouTube from "react-youtube";
 
 const CourseDetails = () => {
   const { id } = useParams();
-  const { allCourses, calculateRating, currency } = useContext(AppContext);
-  const [openChapters, setOpenChapters] = useState([]);
-  const [isAlreadyEnrolled, setIsAlreadyEnrolled] = useState(false);
+  const { allCourses, calculateRating, currency } =
+    useContext(AppContext);
 
+  const [openChapters, setOpenChapters] = useState([]);
+  const [isAlreadyEnrolled, setIsAlreadyEnrolled] =
+    useState(false);
+  const [currentLecture, setCurrentLecture] =
+    useState(null);
+
+  // ✅ KEEP useMemo (unchanged)
   const courseData = useMemo(() => {
-    if (!allCourses || allCourses.length === 0) return null;
-    return allCourses.find((course) => course._id === id) || null;
+    if (!allCourses || allCourses.length === 0)
+      return null;
+    return (
+      allCourses.find(
+        (course) => course._id === id
+      ) || null
+    );
   }, [allCourses, id]);
 
-  if (!courseData) {
-    return (
-      <div className="px-6 md:px-20 py-10">
-        <p className="text-gray-500 text-lg">Loading course...</p>
-      </div>
-    );
-  }
+  
 
-  // ---------- Rating, Price, Students ----------
+  // ---------- META ----------
   const rating = calculateRating(courseData);
-  const finalPrice = (
-    courseData.coursePrice - (courseData.discount * courseData.coursePrice) / 100
-  ).toFixed(2);
+  const enrolled =
+    courseData.studentsEnrolled ?? 0;
+  const totalRatings =
+    courseData.courseRatings?.length || 0;
 
-  const oldPrice = courseData.coursePrice?.toFixed
-    ? courseData.coursePrice.toFixed(2)
-    : courseData.coursePrice;
-
-  const enrolled = courseData.studentsEnrolled ?? 0;
-  const totalRatings = courseData.courseRatings?.length || 0;
-
-  // ---------- Duration + Total Lectures ----------
   const totalMinutes =
-    courseData.courseContent?.reduce((chapterSum, chapter) => {
-      const minutes =
-        chapter?.chapterContent?.reduce((sum, lecture) => {
-          return sum + Number(lecture?.lectureDuration || 0);
-        }, 0) || 0;
+    courseData.courseContent?.reduce(
+      (chapterSum, chapter) => {
+        const minutes =
+          chapter?.chapterContent?.reduce(
+            (sum, lecture) =>
+              sum +
+              Number(
+                lecture?.lectureDuration || 0
+              ),
+            0
+          ) || 0;
+        return chapterSum + minutes;
+      },
+      0
+    ) || 0;
 
-      return chapterSum + minutes;
-    }, 0) || 0;
-
-  const durationLabel = humanizeDuration(totalMinutes * 60 * 1000, {
-    units: ["h", "m"],
-    round: true,
-  });
+  const durationLabel = humanizeDuration(
+    totalMinutes * 60 * 1000,
+    { units: ["h", "m"], round: true }
+  );
 
   const totalLectures =
-    courseData.courseContent?.reduce((count, chapter) => {
-      return count + (chapter?.chapterContent?.length || 0);
-    }, 0) || 0;
+    courseData.courseContent?.reduce(
+      (count, chapter) =>
+        count +
+        (chapter?.chapterContent?.length ||
+          0),
+      0
+    ) || 0;
 
-  // ---------- Accordion state for Course Structure ----------
+  const finalPrice = (
+    courseData.coursePrice -
+    (courseData.discount *
+      courseData.coursePrice) /
+      100
+  ).toFixed(2);
+
+  const oldPrice =
+    courseData.coursePrice?.toFixed
+      ? courseData.coursePrice.toFixed(2)
+      : courseData.coursePrice;
+
+  // ---------- Accordion ----------
   const toggleChapter = (index) => {
     setOpenChapters((prev) => ({
       ...prev,
@@ -67,219 +94,195 @@ const CourseDetails = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-cyan-100 to-white">
-      {/* ===== TOP HERO + SIDE CARD ===== */}
       <section className="border-b">
-        <div className="max-w-6xl mx-auto px-6 md:px-10 py-6 md:py-8 flex flex-col lg:flex-row lg:items-start lg:gap-10">
-          {/* LEFT: Title + meta */}
+        <div className="max-w-6xl mx-auto px-6 md:px-10 py-6 md:py-8 flex flex-col lg:flex-row lg:gap-10">
+
+          {/* LEFT */}
           <div className="flex-1">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <h1 className="text-3xl md:text-4xl font-bold">
               {courseData.courseTitle}
             </h1>
 
-            <p className="mt-3 text-sm md:text-base text-gray-700 max-w-2xl">
-              Learn the fundamentals of {courseData.courseTitle} including core
-              concepts, practical examples, and real-world applications.
+            <p className="mt-3 text-gray-700 max-w-2xl">
+              Learn the fundamentals of{" "}
+              {courseData.courseTitle}.
             </p>
 
-            {/* META DETAILS */}
-            <div className="mt-4 space-y-1 text-sm text-gray-700">
-              <div className="flex flex-wrap items-center gap-3">
-                <p className="font-medium">{rating.toFixed(1)}</p>
-
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => {
-                    const filled = i < Math.floor(rating);
-                    return (
-                      <span
-                        key={i}
-                        className={`w-4 h-4 text-sm leading-4 ${
-                          filled ? "text-yellow-400" : "text-gray-300"
-                        }`}
-                      >
-                        ★
-                      </span>
-                    );
-                  })}
-                </div>
-
-                <p className="text-gray-500">({totalRatings} ratings)</p>
-                <span className="text-gray-300">•</span>
-                <p className="text-gray-600">
-                  {enrolled.toLocaleString()} students enrolled
-                </p>
-              </div>
-
-              <p className="text-gray-700">
-                Course by{" "}
-                <span className="font-medium text-blue-600">
-                  {courseData.educator?.name || "Unknown instructor"}
-                </span>
-              </p>
-
-              <p className="text-gray-600">
-                ⏱ {durationLabel} • {totalLectures} lectures
-              </p>
+            <div className="mt-4 text-sm text-gray-700 flex flex-wrap gap-3">
+              <span className="font-medium">
+                {rating.toFixed(1)}
+              </span>
+              <span>
+                ⭐ ({totalRatings})
+              </span>
+              <span>
+                • {enrolled.toLocaleString()} students
+              </span>
+              <span>
+                • {durationLabel}
+              </span>
+              <span>
+                • {totalLectures} lectures
+              </span>
             </div>
 
-          
-
-            {/* COURSE STRUCTURE (Accordion) */}
-            <div className="mt-8 lg:mt-16 mb-8">
-              <h2 className="text-xl md:text-2xl font-semibold mb-4">
+            {/* COURSE STRUCTURE */}
+            <div className="mt-10">
+              <h2 className="text-xl font-semibold mb-4">
                 Course Structure
               </h2>
 
               <div className="space-y-3">
-                {courseData.courseContent?.map((chapter, index) => {
-                  const isOpen = openChapters[index];
+                {courseData.courseContent.map(
+                  (chapter, index) => {
+                    const isOpen =
+                      openChapters[index];
 
-                  const chapterMinutes =
-                    chapter.chapterContent?.reduce((sum, lecture) => {
-                      return sum + Number(lecture.lectureDuration || 0);
-                    }, 0) || 0;
-
-                  const formattedDuration = humanizeDuration(
-                    chapterMinutes * 60 * 1000,
-                    { units: ["h", "m"], round: true }
-                  );
-
-                  const lectureCount = chapter.chapterContent?.length || 0;
-
-                  return (
-                    <div key={index} className="bg-white border rounded-xl shadow-sm">
-                      {/* Header row */}
-                      <button
-                        type="button"
-                        onClick={() => toggleChapter(index)}
-                        className="w-full flex items-center justify-between px-4 py-3"
+                    return (
+                      <div
+                        key={index}
+                        className="bg-white border rounded-xl"
                       >
-                        <div className="flex items-center gap-3">
-                          <span
-                            className={`text-gray-400 text-lg transform transition-transform ${
-                              isOpen ? "rotate-90" : ""
-                            }`}
-                          >
-                            ▸
-                          </span>
-                          <p className="font-medium text-gray-800">
+                        <button
+                          onClick={() =>
+                            toggleChapter(index)
+                          }
+                          className="w-full px-4 py-3 flex justify-between items-center"
+                        >
+                          <p className="font-medium">
                             {chapter.chapterTitle}
                           </p>
-                        </div>
+                          <span className="text-sm text-gray-500">
+                            {
+                              chapter.chapterContent
+                                .length
+                            }{" "}
+                            lectures
+                          </span>
+                        </button>
 
-                        <p className="text-sm text-gray-500 whitespace-nowrap">
-                          {lectureCount} lectures • {formattedDuration}
-                        </p>
-                      </button>
-
-                      {/* Lectures list */}
-                      {isOpen && (
-                        <div className="border-t px-4 py-3 space-y-2">
-                          {chapter.chapterContent?.map((lecture, i) => (
-                            <div
-                              key={i}
-                              className="flex items-center justify-between text-sm text-gray-700"
-                            >
-                              <span>
-                                {i + 1}. {lecture.lectureTitle}
-                              </span>
-                              <span className="text-gray-500">{lecture.lectureDuration} min</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                        {isOpen && (
+                          <div className="border-t px-4 py-3 space-y-2">
+                            {chapter.chapterContent.map(
+                              (lecture, i) => (
+                                <button
+                                  key={i}
+                                  onClick={() =>
+                                    setCurrentLecture(
+                                      lecture
+                                    )
+                                  }
+                                  className={`w-full flex justify-between text-sm px-2 py-2 rounded
+                                    ${
+                                      currentLecture?.videoId ===
+                                      lecture.videoId
+                                        ? "bg-blue-100 text-blue-700"
+                                        : "hover:bg-gray-100"
+                                    }`}
+                                >
+                                  <span>
+                                    {i + 1}.{" "}
+                                    {
+                                      lecture.lectureTitle
+                                    }
+                                  </span>
+                                  <span className="text-gray-500">
+                                    {
+                                      lecture.lectureDuration
+                                    }{" "}
+                                    min
+                                  </span>
+                                </button>
+                              )
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }
+                )}
               </div>
-                {/* ===== description ===== */}
-            <div className="mt-8 lg:mt-10">
-              <h2 className="text-xl md:text-2xl font-semibold mb-4">
+            </div>
+
+            {/* DESCRIPTION */}
+            <div className="mt-10">
+              <h2 className="text-xl font-semibold mb-4">
                 Course Description
               </h2>
               <div
-                className="text-sm md:text-base text-gray-700 leading-relaxed space-y-2 bg-white p-6 rounded-lg shadow-sm"
-                dangerouslySetInnerHTML={{ __html: courseData.courseDescription }}
+                className="bg-white p-6 rounded shadow text-gray-700"
+                dangerouslySetInnerHTML={{
+                  __html:
+                    courseData.courseDescription,
+                }}
               />
             </div>
-            </div>
           </div>
-           
-           
-          {/* RIGHT: Course summary card */}
-          <aside className="mt-8 lg:mt-0 lg:w-72 lg:shrink-0">
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-              <div className="w-full h-32 bg-white flex items-center justify-center overflow-hidden">
-                <img
-                  src={courseData.courseThumbnail}
-                  alt={courseData.courseTitle}
-                  className="w-full h-full object-cover"
-                />
+
+          {/* RIGHT */}
+          <aside className="lg:w-72">
+            <div className="bg-white rounded-xl shadow overflow-hidden">
+
+              {/* ✅ YOUTUBE PLAYER */}
+              <div className="w-full aspect-video bg-black">
+                {currentLecture ? (
+                  <YouTube
+                    videoId={
+                      currentLecture.videoId
+                    }
+                    opts={{
+                      width: "100%",
+                      height: "100%",
+                      playerVars: {
+                        autoplay: 1,
+                      },
+                    }}
+                    iframeClassName="w-full h-full"
+                  />
+                ) : (
+                  <div className="h-full flex items-center justify-center text-white">
+                    Select a lecture
+                  </div>
+                )}
               </div>
 
-              {/* CARD CONTENT */}
-              <div className="p-4 space-y-3">
-                <p className="text-xs text-rose-500 font-medium flex items-center gap-1">
-                  ⏰ Limited time price!
+              {/* PRICE */}
+              <div className="p-4 space-y-4">
+                <p className="text-2xl font-bold">
+                  {currency}
+                  {finalPrice}
                 </p>
 
-                <div className="flex items-end gap-2">
-                  <span className="text-2xl font-bold">
+                {oldPrice && (
+                  <p className="text-sm line-through text-gray-400">
                     {currency}
-                    {finalPrice}
-                  </span>
-
-                  {oldPrice && (
-                    <span className="text-slate-400 line-through text-xs">
-                      {currency}
-                      {oldPrice}
-                    </span>
-                  )}
-
-                  {courseData.discount > 0 && (
-                    <span className="text-green-500 text-xs font-semibold">
-                      {courseData.discount}% off
-                    </span>
-                  )}
-                </div>
+                    {oldPrice}
+                  </p>
+                )}
 
                 <button
-                  onClick={() => setIsAlreadyEnrolled(true)}
+                  onClick={() =>
+                    setIsAlreadyEnrolled(true)
+                  }
                   disabled={isAlreadyEnrolled}
-                  className={`
-                    w-full py-3 rounded md:mt-6 mt-4 font-medium text-white 
-                    ${isAlreadyEnrolled ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}
-                  `}
+                  className={`w-full py-3 rounded text-white
+                    ${
+                      isAlreadyEnrolled
+                        ? "bg-gray-400"
+                        : "bg-blue-600 hover:bg-blue-700"
+                    }`}
                 >
-                  {isAlreadyEnrolled ? "Already Enrolled" : "Enroll Now"}
+                  {isAlreadyEnrolled
+                    ? "Already Enrolled"
+                    : "Enroll Now"}
                 </button>
-
-                <div className="flex flex-wrap items-center gap-3 text-[11px] text-gray-600 pt-2 border-t">
-                  <span>⭐ {rating.toFixed(1)}</span>
-                  <span>• {durationLabel}</span>
-                  <span>• {totalLectures} lessons</span>
-                  <span>• {enrolled.toLocaleString()} students</span>
-
-                  <div className="pt-6">
-                    <p className="md:text-xl text-lg font-medium text-gray-800">
-                      What's in the course?
-                    </p>
-                    <ul className="ml-4 pt-2 text-sm md:text-default list-disc text-gray-500">
-                      <li>Lifetime access with free updates.</li>
-                      <li>Step-by-step, hands-on project guidance.</li>
-                      <li>Downloadable resources and source code.</li>
-                      <li>Quizzes to test your knowledge.</li>
-                      <li>Certificate of completion.</li>
-                    </ul>
-                  </div>
-                </div>
               </div>
             </div>
           </aside>
         </div>
       </section>
-      <Footer />
 
-      
+      <Footer />
     </div>
   );
 };
