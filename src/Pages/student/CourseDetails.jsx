@@ -21,7 +21,7 @@ const CourseDetails = () => {
   const [currentLecture, setCurrentLecture] =
     useState(null);
 
-  // ✅ KEEP useMemo (unchanged)
+  
   const courseData = useMemo(() => {
     if (!allCourses || allCourses.length === 0)
       return null;
@@ -223,28 +223,29 @@ const CourseDetails = () => {
           <aside className="lg:w-72">
             <div className="bg-white rounded-xl shadow overflow-hidden">
 
-              {/* ✅ YOUTUBE PLAYER */}
+              {/* YOUTUBE PLAYER */}
               <div className="w-full aspect-video bg-black">
-                {currentLecture ? (
-                  <YouTube
-                    videoId={
-                      currentLecture.videoId
-                    }
-                    opts={{
-                      width: "100%",
-                      height: "100%",
-                      playerVars: {
-                        autoplay: 1,
-                      },
-                    }}
-                    iframeClassName="w-full h-full"
-                  />
-                ) : (
-                  <div className="h-full flex items-center justify-center text-white">
-                    Select a lecture
-                  </div>
-                )}
-              </div>
+  {currentLecture ? (
+    <YouTube
+      videoId={currentLecture.videoId}
+      opts={{
+        width: "100%",
+        height: "100%",
+        playerVars: {
+          autoplay: 1,
+        },
+      }}
+      iframeClassName="w-full h-full"
+    />
+  ) : (
+    <img
+      src={courseData.courseThumbnail}
+      alt={courseData.courseTitle}
+      className="w-full h-full object-cover"
+    />
+  )}
+</div>
+
 
               {/* PRICE */}
               <div className="p-4 space-y-4">
