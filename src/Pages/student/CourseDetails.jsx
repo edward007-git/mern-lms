@@ -9,7 +9,7 @@ import { AppContext } from "../../Context/AppContext";
 import humanizeDuration from "humanize-duration";
 import Footer from "../../Components/student/Footer";
 import YouTube from "react-youtube";
-
+import Loading from "../../Components/student/Loading";
 const CourseDetails = () => {
   const { id } = useParams();
   const { allCourses, calculateRating, currency } =
@@ -32,7 +32,10 @@ const CourseDetails = () => {
     );
   }, [allCourses, id]);
 
-  
+  if (!courseData) {
+  return <Loading />;
+}
+
 
   // ---------- META ----------
   const rating = calculateRating(courseData);
