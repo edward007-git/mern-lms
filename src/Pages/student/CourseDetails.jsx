@@ -95,7 +95,8 @@ const CourseDetails = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-cyan-100 to-white">
       <section className="border-b">
-        <div className="max-w-6xl mx-auto px-6 md:px-10 py-6 md:py-8 flex flex-col lg:flex-row lg:gap-10">
+   <div className="w-full px-6 md:px-10 py-6 md:py-8 flex flex-col lg:flex-row lg:gap-10">
+
 
           {/* LEFT */}
           <div className="flex-1">
@@ -224,27 +225,22 @@ const CourseDetails = () => {
             <div className="bg-white rounded-xl shadow overflow-hidden">
 
               {/* YOUTUBE PLAYER */}
-              <div className="w-full aspect-video bg-black">
+            <div className="relative w-full aspect-[16/10] sm:aspect-video bg-black">
   {currentLecture ? (
     <YouTube
       videoId={currentLecture.videoId}
-      opts={{
-        width: "100%",
-        height: "100%",
-        playerVars: {
-          autoplay: 1,
-        },
-      }}
+      className="absolute inset-0"
       iframeClassName="w-full h-full"
     />
   ) : (
     <img
       src={courseData.courseThumbnail}
       alt={courseData.courseTitle}
-      className="w-full h-full object-cover"
+      className="absolute inset-0 w-full h-full object-cover"
     />
   )}
 </div>
+
 
 
               {/* PRICE */}
