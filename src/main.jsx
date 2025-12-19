@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App'
-import AppContextProvider from './Context/AppContext';
+import AppContextProvider from './Context/AppContextProvider';
 import { BrowserRouter } from 'react-router-dom'
 import { ClerkProvider } from '@clerk/clerk-react'
 
